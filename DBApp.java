@@ -1,14 +1,18 @@
-public class DBApp{
+import java.util.List;
+
+public class DBApp {
+
   public static void main(String[] args) {
-    StudentDao std = new StudentDao();
-    String studentArray[][] = std.getAll();
 
+    StudentDao stDao = new StudentDao();
 
-    for(int i =0; i < studentArray.length; i++ ){
+    List<Student> students = stDao.getAll();
 
-      for(int j =0; j < studentArray[0].length; j++){
-        System.out.print(studentArray[i][j] + "\t\t");
-      }
+    for (Student student : students) {
+
+      System.out.print(student.getId() + "\t\t");
+      System.out.print(student.getName() + "\t\t");
+      System.out.print(student.getNic() + "\t\t");
       System.out.println(" ");
     }
 

@@ -2,41 +2,39 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDao {
-    
-    public String[][] getAll(){
 
-        String studentArray[][] = null;
+    public List<Student> getAll() {
 
-    try {
-    Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mca_school", "root", "90896262");
-    Statement stm = con.createStatement(1004,1007);
-    ResultSet resultSet = stm.executeQuery("select * from student");
+        List<Student> students = new ArrayList();
 
-        resultSet.last();
+        try {
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mca_school", "root", "90896262");
+            Statement stm = con.createStatement();
+            ResultSet resultSet = stm.executeQuery("select * from student");
 
-        int totalRows = resultSet.getRow();
+            while (resultSet.next()) {
 
-        studentArray = new String[totalRows][3];
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String nic = resultSet.getString("nic");
 
-        resultSet.first();
+                Student student = new Student();
+                student.setId(id);
+                student.setName(name);
+                student.setNic(nic);
 
-        do{
-            int currentIdenx = resultSet.getRow() -1;
-            studentArray [currentIdenx][0] = resultSet.getString("id");
-            studentArray [currentIdenx][1] = resultSet.getString("name");
-            studentArray [currentIdenx][2] = resultSet.getString("nic");
+                students.add(student);
 
-
-        } while(resultSet.next());
-
+            }
 
         } catch (Exception e) {
-
             System.out.println("Data Base Error:" + e.getMessage());
         }
-        return studentArray;
 
+        return students;
     }
 }
