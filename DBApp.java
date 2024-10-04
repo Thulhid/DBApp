@@ -13,6 +13,7 @@ public class DBApp {
       System.out.print(student.getId() + "\t\t");
       System.out.print(student.getName() + "\t\t");
       System.out.print(student.getNic() + "\t\t");
+      System.out.println(student.getGender().getName() + "\t\t");
       System.out.println(" ");
     }
 

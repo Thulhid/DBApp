@@ -14,18 +14,20 @@ public class StudentDao {
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/mca_school", "root", "90896262");
             Statement stm = con.createStatement();
-            ResultSet resultSet = stm.executeQuery("select * from student");
+            ResultSet rs = stm.executeQuery("select * from student");
 
-            while (resultSet.next()) {
+            while (rs.next()) {
 
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String nic = resultSet.getString("nic");
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String nic = rs.getString("nic");
+                Gender gender = GenderDao.getById(rs.getInt("gender_id"));
 
                 Student student = new Student();
                 student.setId(id);
                 student.setName(name);
                 student.setNic(nic);
+                student.setGender(gender);
 
                 students.add(student);
 

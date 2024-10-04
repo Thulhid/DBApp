@@ -2,6 +2,7 @@ public class Student {
     private int id;
     private String name;
     private String nic;
+    private Gender gender;
 
     public int getId() {
         return id;
@@ -25,6 +26,14 @@ public class Student {
 
     public void setNic(String nic) {
         this.nic = nic;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
 }
